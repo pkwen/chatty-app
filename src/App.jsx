@@ -9,19 +9,33 @@ class App extends Component {
       currentUser: {name: 'Anonymous'},
       messages: []
     }
-    this.addMsg = (newMsg) => {
-      // const oldMsgList = this.state.messages;
-      // const newMsgList = this.state.messages.concat(newMsg);
-      // this.setState({messages: newMsgList});
-      this.socket.send(JSON.stringify(newMsg));
+  }
+
+  //New message sent
+  addMsg = (newMsg) => {
+    this.socket.send(JSON.stringify(newMsg));
+  }
+
+  //Username change
+  changeUser = (name) => {
+    this.setState({currentUser: {name: name}});
+  }
+
+  //Creating WebSocket object
+  socket = new WebSocket('ws:localhost:3001');
+
+  //Receive new message from websocket server and set state to include
+  componentWillMount() {
+    this.socket.onmessage = (event) => {
+      const msg = JSON.parse(event.data);
+      const oldMsgList = this.state.messages;
+      const newMsgList = this.state.messages.concat(msg);
+      this.setState({messages: newMsgList});
     }
   }
+
+  //After rendering
   componentDidMount() {
-    console.log("componentDidMount <App />");
-    this.socket = new WebSocket('ws:localhost:3001');
-    this.socket.onmessage = (event) => {
-      console.log(JSON.parse(event));
-    }
     // setTimeout(() => {
       //   console.log("Simulating incoming message");
       //   // Add a new message to the list of messages in the data store
@@ -36,12 +50,12 @@ class App extends Component {
     // newMsg
     
     render() {
-      console.log('Rendering <App/>');
     return (
       // <h1>Hello React :)</h1>
       <div>
       <MessageList messages={this.state.messages}/>
       <ChatBar 
+        changeUser={this.changeUser}
         currentUser={this.state.currentUser.name}
         addMsg={this.addMsg}
         // messages={this.state.messages}
