@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import ChatBar from './ChatBar.jsx';
 import MessageList from './MessageList.jsx';
+import NavBar from './NavBar.jsx';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      userCount: 0,
       currentUser: {name: 'Anonymous'},
       messages: []
     }
@@ -18,19 +20,40 @@ class App extends Component {
 
   //Username change
   changeUser = (name) => {
+    const notification = {};
+    notification.type = 'postNotification';
+    notification.oldName = this.state.currentUser.name;
+    notification.newName = name;
+    this.socket.send(JSON.stringify(notification));
     this.setState({currentUser: {name: name}});
   }
 
-  //Creating WebSocket object
-  socket = new WebSocket('ws:localhost:3001');
-
+  countUser = (count) => {
+    this.setState({ userCount: count });
+  }
+  
   //Receive new message from websocket server and set state to include
   componentWillMount() {
+    //Creating WebSocket object
+    this.socket = new WebSocket('ws:localhost:3001');
+
+    this.socket.onopen = (event) => {
+      const loginNote = { 
+        name: this.state.currentUser.name,
+        type: 'logInNotification'
+      };
+      this.socket.send(JSON.stringify(loginNote));
+    }
+
     this.socket.onmessage = (event) => {
       const msg = JSON.parse(event.data);
+      console.log(msg);
       const oldMsgList = this.state.messages;
       const newMsgList = this.state.messages.concat(msg);
       this.setState({messages: newMsgList});
+      if(msg.type === 'incomingLogIn' || msg.type === 'incomingLogOut') {
+        this.setState({ userCount: msg.userCount })
+      }
     }
   }
 
@@ -53,6 +76,7 @@ class App extends Component {
     return (
       // <h1>Hello React :)</h1>
       <div>
+      <NavBar userCount={this.state.userCount}/>
       <MessageList messages={this.state.messages}/>
       <ChatBar 
         changeUser={this.changeUser}
