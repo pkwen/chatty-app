@@ -23,7 +23,7 @@ class App extends Component {
     const notification = {};
     notification.type = 'postNotification';
     notification.oldName = this.state.currentUser.name;
-    notification.newName = name;
+    notification.name = name;
     this.socket.send(JSON.stringify(notification));
     this.setState({currentUser: {name: name}});
   }
@@ -77,7 +77,7 @@ class App extends Component {
       // <h1>Hello React :)</h1>
       <div>
       <NavBar userCount={this.state.userCount}/>
-      <MessageList messages={this.state.messages}/>
+      <MessageList messages={this.state.messages} currentUser={this.state.currentUser.name}/>
       <ChatBar 
         changeUser={this.changeUser}
         currentUser={this.state.currentUser.name}
