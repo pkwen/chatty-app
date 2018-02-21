@@ -21,14 +21,10 @@ A dynamic lightweight chatbox web app made with ReactJS.
 
 ## Screenshots
 
-Initial homepage
-(https://github.com/subclinical/chatty-app/blob/master/docs/first-look.png?raw=true)
+!['Initial homepage'](https://github.com/subclinical/chatty-app/blob/master/docs/first-look.png?raw=true)
 
-Username change and send messages
-(https://github.com/subclinical/chatty-app/blob/master/docs/name-change-message.png?raw=true)
+!['Username change and send messages'](https://github.com/subclinical/chatty-app/blob/master/docs/name-change-message.png?raw=true)
 
-Multi-client connections
-(https://github.com/subclinical/chatty-app/blob/master/docs/two-clients.png?raw=true)
+!['Multi-client connections'](https://github.com/subclinical/chatty-app/blob/master/docs/two-clients.png?raw=true)
 
-Image URL rendering and coloured username assignment
-(https://github.com/subclinical/chatty-app/blob/master/docs/image-render.png?raw=true)
+!['Image URL rendering and coloured username assignment'](https://github.com/subclinical/chatty-app/blob/master/docs/image-render.png?raw=true)
