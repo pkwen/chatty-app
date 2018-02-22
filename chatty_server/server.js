@@ -20,8 +20,8 @@ const wss = new SocketServer({ server });
 // the ws parameter in the callback.
 wss.on('connection', (ws) => {
   console.log('Client connected');
-  console.log(wss.clients.size);
-  const colors = ['#6666ff', '#ff3300', '#33cc33', '#cc99ff']
+  console.log(wss.clients);
+  const colors = ['#ffff66', '#66ff66', '#ff99bb', '#99ccff']
   const random = Math.floor(Math.random() * 4);
   const userColor = colors[random];
   //receive message string from browser

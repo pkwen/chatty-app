@@ -3,16 +3,16 @@
     @import url("https://fonts.googleapis.com/css?family=Monoton|Rock+Salt|Ultra");
 
     body {
-      background: white;
-      color: black;
+      background: #404040;
+      color: white;
       font-family: 'Open Sans', sans-serif;
       font-size: 14px;
       margin: 70px 0;
     }
 
     .chatbar {
-      background: teal;
-      border-top: 1px solid black;
+      background: #666699;
+      border-top: 1px solid #666699;
       bottom: 0;
       display: flex;
       left: 0;
@@ -23,12 +23,19 @@
 
     .chatbar-message,
     .chatbar-username {
-      border: 1px solid black;
+      color:white;
+      background-color: #404040;
+      border: 1px solid white;
       display: block;
       height: 40px;
       line-height: 40px;
       margin: 5px;
       padding: 0 9px;
+    }
+
+    .chatbar-message:focus,
+    .chatbar-username:focus {
+      background-color: #4d4d4d;
     }
 
     .chatbar-message {
@@ -75,9 +82,9 @@
     }
 
     .navbar {
-      background: teal;
+      background: #666699;
       color: white;
-      border-bottom: 1px solid black;
+      border-bottom: 1px solid #666699;
       height: 60px;
       left: 0;
       padding: 0 10px;

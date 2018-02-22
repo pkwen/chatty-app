@@ -21,7 +21,10 @@ class ChatBar extends Component {
     }
     //Event on enter press when focus is in username input
     const onUserChange = (event) => {
-      if (event.key === 'Enter' && event.target.value && event.target.value !== "") {
+      if (event.key === 'Enter' 
+        && event.target.value 
+        && event.target.value !== ""
+        && event.target.value !== this.props.currentUser) {
         event.preventDefault();
         const name = event.target.value;
         this.props.changeUser(name);
@@ -30,7 +33,9 @@ class ChatBar extends Component {
     
     //Event on enter press when focus is in content input
     const onEnterPress = (event) => {
-      if(event.key === 'Enter' && event.target.value && event.target.value !== "") {
+      if(event.key === 'Enter' 
+      && event.target.value 
+      && event.target.value !== "") {
       event.preventDefault();
       const msg = {};
       msg.content = document.getElementsByClassName('chatbar-message')[0].value;
