@@ -14,7 +14,7 @@ const server = express()
 
 // Create the WebSockets server
 const wss = new SocketServer({ server });
-
+const clientLog = {};
 // Set up a callback that will run when a client connects to the server
 // When a client connects they are assigned a socket, represented by
 // the ws parameter in the callback.
@@ -24,7 +24,6 @@ wss.on('connection', (ws) => {
   const colors = ['#ffff66', '#66ff66', '#ff99bb', '#99ccff']
   const random = Math.floor(Math.random() * 4);
   const userColor = colors[random];
-  //receive message string from browser
   let username = 'Anonymous';
   ws.on('message', (message) => {
     const newMsg = JSON.parse(message);

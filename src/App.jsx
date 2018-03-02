@@ -35,7 +35,7 @@ class App extends Component {
   //Receive new message from websocket server and set state to include
   componentWillMount() {
     //Creating WebSocket object
-    this.socket = new WebSocket('ws:localhost:3001');
+    this.socket = new WebSocket('ws:localhost:3001', [], {'headers':{'Cookie': 'abc'}});
 
     this.socket.onopen = (event) => {
       const loginNote = { 
